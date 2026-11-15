@@ -1,0 +1,44 @@
+[
+  {
+    "trade_id": "PAPER-12F90155",
+    "symbol": "DOGEUSDT",
+    "side": "BUY",
+    "qty": 763.5,
+    "price": 0.06547,
+    "notional": 49.99,
+    "stop_price": 0.06529,
+    "target_price": 0.06577,
+    "status": "FILLED",
+    "mode": "PAPER",
+    "timestamp": "2026-11-13T20:52:23Z",
+    "why": "Binance DOGEUSDT Day Trade: 763.5 DOGEUSDT ($49.99 USDT), bound by position cap (risk: $0.15 <= $2.50 at stop $0.07)"
+  },
+  {
+    "trade_id": "PAPER-795113DF",
+    "symbol": "DOGEUSDT",
+    "side": "BUY",
+    "qty": 763.5,
+    "price": 0.06547,
+    "notional": 49.99,
+    "stop_price": 0.06529,
+    "target_price": 0.06577,
+    "status": "FILLED",
+    "mode": "PAPER",
+    "timestamp": "2026-11-13T20:52:26Z",
+    "why": "Binance DOGEUSDT Day Trade: 763.5 DOGEUSDT ($49.99 USDT), bound by position cap (risk: $0.15 <= $2.50 at stop $0.07)"
+  },
+  {
+    "trade_id": "FLATTEN-22081726",
+    "symbol": "DOGEUSDT",
+    "side": "SELL",
+    "qty": 1527.0,
+    "price": 0.06543,
+    "notional": 99.91,
+    "pnl": -0.11,
+    "pnl_pct": -0.11,
+    "status": "FILLED",
+    "mode": "PAPER TRADING",
+    "timestamp": "2026-11-13T20:54:07Z",
+    "why": "Flatten/Close position: Realized PnL $-0.11 (-0.11%)"
+  }
+]

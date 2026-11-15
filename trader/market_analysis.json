@@ -1,0 +1,46 @@
+{
+  "updated_at": "2026-11-13T20:46:48.206378+00:00",
+  "primary_symbol": "DOGEUSDT",
+  "analysis": {
+    "symbol": "DOGEUSDT",
+    "analyzed_at": "2026-11-13T20:46:48.206336+00:00",
+    "market_price": 0.06547,
+    "change_24h_pct": -0.85,
+    "high_24h": 0.0667,
+    "low_24h": 0.06301,
+    "range_position_pct": 66.7,
+    "structure": "CONSOLIDATION_RANGE",
+    "structure_desc": "Healthy mid-range consolidation (66.7% pos). Coiling for directional impulse.",
+    "execution_verdict": "CLEARED_FOR_EXECUTION",
+    "orderbook_metrics": {
+      "best_bid": 0.06547,
+      "best_ask": 0.06548,
+      "spread_abs": 1e-05,
+      "spread_pct": 0.0153,
+      "spread_rating": "ULTRA_TIGHT",
+      "top20_bid_depth_usdt": 755600.41,
+      "top20_ask_depth_usdt": 581404.92,
+      "bid_ask_imbalance_ratio": 0.565,
+      "buyer_volume_pct": 56.51,
+      "seller_volume_pct": 43.49,
+      "buyer_seller_balance": "56.5% buyers ($755,600.41) vs 43.5% sellers ($581,404.92)",
+      "largest_bid_wall": {
+        "price": 0.06535,
+        "qty": 1738997.0,
+        "notional_usdt": 113643.45
+      },
+      "largest_ask_wall": {
+        "price": 0.06565,
+        "qty": 1247803.0,
+        "notional_usdt": 81918.27
+      },
+      "imbalance_verdict": "BALANCED_DEPTH",
+      "orderbook_note": "Even distribution between bids and asks.",
+      "simulated_order_size_usdt": 50.0,
+      "estimated_avg_fill": 0.06548,
+      "estimated_slippage_pct": 0.0,
+      "max_acceptable_slippage_pct": 0.2,
+      "slippage_pass": true
+    }
+  }
+}

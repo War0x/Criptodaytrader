@@ -1,0 +1,308 @@
+{
+  "updated_at": "2026-11-13T20:46:39.542286+00:00",
+  "total_articles": 15,
+  "sentiment_summary": {
+    "bullish": 1,
+    "bearish": 7,
+    "neutral": 7,
+    "market_bias": "BEARISH_PRESSURE"
+  },
+  "candidate_audits": {
+    "LINK": {
+      "symbol": "LINK",
+      "base_symbol": "LINK",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade LINK: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "AVAX": {
+      "symbol": "AVAX",
+      "base_symbol": "AVAX",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade AVAX: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "NEAR": {
+      "symbol": "NEAR",
+      "base_symbol": "NEAR",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade NEAR: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "base_symbol": "SOL",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade SOL: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "base_symbol": "ETH",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade ETH: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "SUI": {
+      "symbol": "SUI",
+      "base_symbol": "SUI",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade SUI: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "BNB": {
+      "symbol": "BNB",
+      "base_symbol": "BNB",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade BNB: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "DOGE": {
+      "symbol": "DOGE",
+      "base_symbol": "DOGE",
+      "allow_entry": true,
+      "action": "ALLOW_ENTRY",
+      "risk_level": "LOW",
+      "sentiment": "NEUTRAL",
+      "sentiment_score": 0,
+      "adverse_events": [],
+      "reason": "Clear to trade DOGE: No exploit, regulatory, or insolvency red flags detected."
+    },
+    "BTC": {
+      "symbol": "BTC",
+      "base_symbol": "BTC",
+      "allow_entry": false,
+      "action": "BLOCK_ENTRY",
+      "risk_level": "HIGH",
+      "sentiment": "BEARISH",
+      "sentiment_score": -8,
+      "adverse_events": [],
+      "reason": "Strong bearish news pressure (score: -8) for BTC."
+    }
+  },
+  "articles": [
+    {
+      "title": "JPMorgan\u2019s Bitcoin and Crypto-Linked Holdings Approach $1 Billion",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383267/jpmorgan-bitcoin-crypto-linked-holdings-approach-1-billion",
+      "published": "2026-11-13T20:16:03+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -1,
+      "adverse_flags": [],
+      "summary": "The bank\u2019s Q3 13F shows roughly $981 million across Bitcoin ETFs, Strategy and Coinbase\u2014likely over $1 billion counting Robinhood and miners."
+    },
+    {
+      "title": "Dormant Bitcoin Wallets Wake Up After 16 Years, Moving $6.9 Million",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383264/dormant-bitcoin-wallets-wake-up-after-16-years",
+      "published": "2026-11-13T19:36:03+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Two Bitcoin mining rewards from September 2010 moved minutes apart. The coins are worth nearly 1.15 million times their original market value."
+    },
+    {
+      "title": "Bitcoin plunges to $68,000 as Anthropic IPO frenzy adds to market jitters",
+      "source": "CoinDesk",
+      "link": "https://www.coindesk.com/markets/2026/11/13/bitcoin-slides-to-usd68k-as-nvidia-turmoil-anthropic-ipo-fuel-broader-market-sell-off",
+      "published": "2026-11-13T18:39:58+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -1,
+      "adverse_flags": [],
+      "summary": "Analysts see no direct link between Nvidia and bitcoin's decline, pointing instead to investor capital headed into Anthropic as well as a broader risk-off move."
+    },
+    {
+      "title": "Fed Chair Warsh Wants Answers on AI Inflation\u2014and Bitcoin May Feel the Impact",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383259/fed-chair-warsh-wants-answers-ai-inflation-bitcoin",
+      "published": "2026-11-13T18:36:02+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "The Federal Reserve is examining whether AI will lower prices or keep inflation elevated, a question that could shape interest rates and the outlook for crypto."
+    },
+    {
+      "title": "Metaplanet swings to $170M loss as Bitcoin sale hits earnings",
+      "source": "Cointelegraph",
+      "link": "https://cointelegraph.com/news/metaplanet-swings-170m-loss-bitcoin-sale-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "published": "2026-11-13T18:28:29+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -1,
+      "adverse_flags": [],
+      "summary": "Bitcoin sales, valuation losses and rising borrowing costs weighed on the Japanese company\u2019s earnings despite higher revenue and operating profit."
+    },
+    {
+      "title": "Bitcoin Hits 12-Week Low as Fed Rate Fears Undo Most of Summer Rally",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383231/bitcoin-hits-12-week-low-fed-rate-fears-undo-summer-rally",
+      "published": "2026-11-13T17:22:54+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BULLISH",
+      "score": 1,
+      "adverse_flags": [],
+      "summary": "Bitcoin is back near August levels as persistent inflation, growing expectations of another interest-rate hike and ETF withdrawals pressure prices."
+    },
+    {
+      "title": "Bitcoin holds below $70K as stocks slip despite a cooler US PPI print",
+      "source": "Cointelegraph",
+      "link": "https://cointelegraph.com/markets/bitcoin-below-70k-stocks-slip-cooler-us-ppi-print?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "published": "2026-11-13T16:39:11+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Bitcoin was down about 4% on the day amid a tepid market reaction to October\u2019s US PPI reading, which came in below expected levels."
+    },
+    {
+      "title": "Bitcoin heads for sixth weekly loss as Anthropic\u2019s blockbuster IPO looms",
+      "source": "CoinDesk",
+      "link": "https://www.coindesk.com/markets/2026/11/13/bitcoin-heads-for-sixth-weekly-loss-as-anthropic-s-blockbuster-ipo-looms",
+      "published": "2026-11-13T16:01:27+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -1,
+      "adverse_flags": [],
+      "summary": "Bitcoin is down 21% this year as investors weigh Anthropic\u2019s anticipated listing, Nvidia\u2019s leadership upheaval and rising Fed rate hike expectations."
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "source": "Cointelegraph",
+      "link": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "published": "2026-11-13T13:49:44+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, Web3 and crypto regulation."
+    },
+    {
+      "title": "Nakamoto shares fall 6% premarket after Q3 revenue turns negative",
+      "source": "Cointelegraph",
+      "link": "https://cointelegraph.com/markets/nakamoto-shares-fall-after-negative-q3-revenue?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "published": "2026-11-13T13:04:19+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -1,
+      "adverse_flags": [],
+      "summary": "A $5.8 million Bitcoin options loss pushed Nakamoto\u2019s quarterly operating revenue below zero, while the company extended repayment of $60 million in Kraken debt to 2027."
+    },
+    {
+      "title": "Morning Minute: Crypto Plummets as Jensen Huang Exits Nvidia",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383222/morning-minute-crypto-plummets-as-jensen-huang-exits-nvidia",
+      "published": "2026-11-13T13:03:40+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Bitcoin fell all the way to $68,000 overnight and hit a new three-month low. But are there reasons for hope?"
+    },
+    {
+      "title": "Bitcoin's momentum gauge is turning red, could send prices back below $60,000",
+      "source": "CoinDesk",
+      "link": "https://www.coindesk.com/daybook-us/2026/11/13/bitcoin-s-momentum-gauge-is-turning-red-could-send-prices-back-below-usd60-000",
+      "published": "2026-11-13T12:14:22+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Your day-ahead look for Nov. 13, 2026"
+    },
+    {
+      "title": "Bitcoin hits 12-week low as dollar rallies on interest-rate outlook, liquidations top $1.6 billion",
+      "source": "CoinDesk",
+      "link": "https://www.coindesk.com/markets/2026/11/13/bitcoin-hits-12-week-low-as-dollar-rallies-on-interest-rate-outlook-liquidations-top-usd1-6-billion",
+      "published": "2026-11-13T11:52:25+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -2,
+      "adverse_flags": [],
+      "summary": "Bitcoin (BTC) fell below $70,000 for the first time since August and is down 3.5% since midnight UTC, as the dollar climbs and liquidations top $1.6 billion."
+    },
+    {
+      "title": "Bitcoin Drops to $69K On 'Concentrated Liquidation' and 'Weakening' Demand",
+      "source": "Decrypt",
+      "link": "https://decrypt.co/383214/bitcoin-drops-to-69k-on-concentrated-liquidation-and-weakening-demand",
+      "published": "2026-11-13T11:20:44+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "BEARISH",
+      "score": -2,
+      "adverse_flags": [],
+      "summary": "BTC dropped 5% on Friday, falling below $69,000. Experts say it was triggered by a \"concentrated liquidation\" and \"weakening\" demand."
+    },
+    {
+      "title": "Bitcoin returns to 200-week trend line as analyst sees risk of $57.7K next",
+      "source": "Cointelegraph",
+      "link": "https://cointelegraph.com/markets/bitcoin-returns-200-week-trend-line-analyst-sees-risk-57k-next?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "published": "2026-11-13T09:39:05+00:00",
+      "symbols": [
+        "BTC"
+      ],
+      "sentiment": "NEUTRAL",
+      "score": 0,
+      "adverse_flags": [],
+      "summary": "Bitcoin price action interacted with its 200-week simple moving average for the first time since mid-August as it fell below $68,000."
+    }
+  ]
+}

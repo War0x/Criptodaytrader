@@ -1,0 +1,26 @@
+{
+  "created_by": "trader-exit",
+  "created_at": "2026-11-15T07:14:27Z",
+  "symbol": "DOGEUSDT",
+  "side": "BUY",
+  "entry": 0.05786,
+  "stop": 0.05751,
+  "stop_rule": "swing_low",
+  "stop_detail": "Recent swing low 0.05757 buffered by 0.1% (0.50% risk)",
+  "target": 0.05839,
+  "target_1r": 0.05839,
+  "target_2r": 0.05874,
+  "risk_per_unit": 0.00035,
+  "risk_pct": 0.6,
+  "reward_risk": 1.51,
+  "reward_risk_2r": 2.51,
+  "atr_14": 0.00022,
+  "bracket": {
+    "order_type": "BRACKET_OCO",
+    "tp1_pct": 50,
+    "tp2_pct": 50,
+    "breakeven_trigger": 0.05839,
+    "breakeven_rule": "Move stop-loss to entry price when Target 1R is reached"
+  },
+  "status": "ready"
+}

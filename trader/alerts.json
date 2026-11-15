@@ -1,0 +1,30 @@
+{
+  "rules": [
+    {
+      "id": "dogeusdt-plan-stop",
+      "symbol": "DOGEUSDT",
+      "type": "stop",
+      "price": 0.06534,
+      "note": "Dynamic 1.5x ATR (0.00012) safety cushion",
+      "created_at": "2026-11-13T20:47:53Z"
+    },
+    {
+      "id": "dogeusdt-plan-target",
+      "symbol": "DOGEUSDT",
+      "type": "target",
+      "price": 0.06579,
+      "note": "Plan Take Profit 1R",
+      "created_at": "2026-11-13T20:47:53Z"
+    },
+    {
+      "id": "dogeusdt-plan-target-2r",
+      "symbol": "DOGEUSDT",
+      "type": "target",
+      "price": 0.06597,
+      "note": "Plan Take Profit 2R",
+      "created_at": "2026-11-13T20:47:53Z"
+    }
+  ],
+  "rung": {},
+  "last_check": "2026-11-13T20:52:34Z"
+}

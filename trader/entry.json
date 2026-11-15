@@ -1,0 +1,21 @@
+{
+  "created_by": "trader-entry",
+  "symbol": "DOGEUSDT",
+  "setup": "breakout",
+  "side": "buy",
+  "date": "2026-11-15",
+  "status": "triggered",
+  "time": "2026-11-15 07:14:27 UTC",
+  "price": 0.05786,
+  "level": 0.05845,
+  "resistance_5m": 0.05845,
+  "resistance_15m": 0.05877,
+  "support_5m": 0.05757,
+  "interval": "5m",
+  "volume": 1139361.0,
+  "avg_volume": 1773869.7,
+  "volume_ratio": 0.64,
+  "source": "binance",
+  "checked_at": "2026-11-15T07:14:27Z",
+  "reason": "5m candle closed at 0.05786 [FORCED TRIGGER] above resistance 0.05845 with volume ratio 0.64x (avg: 1773869.7)"
+}
