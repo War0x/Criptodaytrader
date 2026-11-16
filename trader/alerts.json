@@ -25,6 +25,8 @@
       "created_at": "2026-11-13T20:47:53Z"
     }
   ],
-  "rung": {},
-  "last_check": "2026-11-13T20:52:34Z"
+  "rung": {
+    "dogeusdt-plan-stop": "2026-11-16T04:39:02Z"
+  },
+  "last_check": "2026-11-16T04:40:41Z"
 }

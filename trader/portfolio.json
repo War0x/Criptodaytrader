@@ -1,9 +1,21 @@
 {
-  "cash": 99.93,
-  "portfolio_value": 99.93,
+  "cash": 49.94,
+  "portfolio_value": 99.87,
   "currency": "USDT",
-  "as_of": "2026-11-13T20:54:07Z",
+  "as_of": "2026-11-16T04:40:41Z",
   "mode": "PAPER TRADING",
   "exchange": "binance",
-  "positions": []
+  "positions": [
+    {
+      "symbol": "NEARUSDT",
+      "qty": 15.71,
+      "entry_price": 3.182,
+      "current_price": 3.178,
+      "stop_price": 3.1585,
+      "target_price": 3.2173,
+      "pnl": -0.06,
+      "pnl_pct": -0.13,
+      "opened_at": "2026-11-16T04:39:01Z"
+    }
+  ]
 }

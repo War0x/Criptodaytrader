@@ -40,5 +40,19 @@
     "mode": "PAPER TRADING",
     "timestamp": "2026-11-13T20:54:07Z",
     "why": "Flatten/Close position: Realized PnL $-0.11 (-0.11%)"
+  },
+  {
+    "trade_id": "PAPER-021C8FDE",
+    "symbol": "NEARUSDT",
+    "side": "BUY",
+    "qty": 15.71,
+    "price": 3.182,
+    "notional": 49.99,
+    "stop_price": 3.1585,
+    "target_price": 3.2173,
+    "status": "FILLED",
+    "mode": "PAPER",
+    "timestamp": "2026-11-16T04:39:01Z",
+    "why": "Binance NEARUSDT Day Trade: 15.71 NEARUSDT ($49.99 USDT), bound by position cap (risk: $0.37 <= $2.50 at stop $3.16)"
   }
 ]
