@@ -1,59 +1,59 @@
 {
-  "timestamp": "2026-11-16T02:14:23Z",
+  "timestamp": "2026-11-16T03:25:34Z",
   "overall": "PASS",
   "pass_count": 1,
   "passed_count": 1,
   "block_count": 0,
   "blocked_count": 0,
   "cash_before": 99.93,
-  "cash_after": 49.93,
+  "cash_after": 49.95,
   "results": [
     {
       "index": 1,
-      "symbol": "DOGEUSDT",
+      "symbol": "NEARUSDT",
       "side": "BUY",
-      "qty": 845.4,
-      "notional": 50.0,
-      "entry": 0.05914,
-      "stop": 0.05844,
-      "target": 0.06019,
+      "qty": 15.53,
+      "notional": 49.98,
+      "entry": 3.218,
+      "stop": 3.1558,
+      "target": 3.3113,
       "verdict": "PASS",
-      "fingerprint": "7546d0595b7c64b0",
+      "fingerprint": "240d5f31752ab822",
       "reasons": [],
       "warnings": [],
       "info": [
-        "Notional: $50.00 USDT (>= $5.00 min)",
-        "Stop Loss: $0.058440 USDT confirmed",
-        "Trade Risk: $0.59 USDT <= $2.50 limit",
+        "Notional: $49.98 USDT (>= $5.00 min)",
+        "Stop Loss: $3.155800 USDT confirmed",
+        "Trade Risk: $0.97 USDT <= $2.50 limit",
         "Reward/Risk: 1.50 R >= 1.50 R required",
-        "Cumulative Daily Risk: $0.59 / $7.50 USDT",
+        "Cumulative Daily Risk: $0.97 / $7.50 USDT",
         "Trade Count: #1 of max 5 today",
-        "Binance Spread: 0.0169% within tolerance (<= 0.2%)"
+        "Binance Spread: 0.0311% within tolerance (<= 0.2%)"
       ]
     }
   ],
   "orders": [
     {
       "index": 1,
-      "symbol": "DOGEUSDT",
+      "symbol": "NEARUSDT",
       "side": "BUY",
-      "qty": 845.4,
-      "notional": 50.0,
-      "entry": 0.05914,
-      "stop": 0.05844,
-      "target": 0.06019,
+      "qty": 15.53,
+      "notional": 49.98,
+      "entry": 3.218,
+      "stop": 3.1558,
+      "target": 3.3113,
       "verdict": "PASS",
-      "fingerprint": "7546d0595b7c64b0",
+      "fingerprint": "240d5f31752ab822",
       "reasons": [],
       "warnings": [],
       "info": [
-        "Notional: $50.00 USDT (>= $5.00 min)",
-        "Stop Loss: $0.058440 USDT confirmed",
-        "Trade Risk: $0.59 USDT <= $2.50 limit",
+        "Notional: $49.98 USDT (>= $5.00 min)",
+        "Stop Loss: $3.155800 USDT confirmed",
+        "Trade Risk: $0.97 USDT <= $2.50 limit",
         "Reward/Risk: 1.50 R >= 1.50 R required",
-        "Cumulative Daily Risk: $0.59 / $7.50 USDT",
+        "Cumulative Daily Risk: $0.97 / $7.50 USDT",
         "Trade Count: #1 of max 5 today",
-        "Binance Spread: 0.0169% within tolerance (<= 0.2%)"
+        "Binance Spread: 0.0311% within tolerance (<= 0.2%)"
       ]
     }
   ]
