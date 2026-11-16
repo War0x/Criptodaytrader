@@ -158,9 +158,14 @@
       border: 1px solid var(--green);
       color: var(--green);
       font-weight: 800;
+      font-size: 12px;
+      padding: 8px 18px;
+      border-radius: 9px;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
     .btn-autonomous:hover {
       background: rgba(14, 203, 129, 0.28);
@@ -1059,7 +1064,6 @@
         <button class="btn btn-autonomous" id="btn-autonomous" onclick="toggleAutonomous()" title="Alternar el piloto automático autónomo">
           <span class="btn-auto-dot" id="btn-auto-dot"></span> <span id="btn-auto-text">⚡ PILOTO: ACTIVO</span>
         </button>
-        <button class="btn btn-gold" onclick="runScanner()">⚡ Escanear Binance</button>
         <button class="btn btn-action" onclick="executePaperTrade()">🎯 Ejecutar Paper</button>
         <button class="btn btn-action" onclick="openHistory()">📊 Abrir Historial</button>
       </div>
