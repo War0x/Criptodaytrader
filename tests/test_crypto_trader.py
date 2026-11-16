@@ -394,8 +394,9 @@ class TestRiskManagerAudits(unittest.TestCase):
 
     def test_risk_block_exceed_daily_trades(self):
         """Verify 6th trade of the day is blocked (max 5)."""
+        today_utc = time.strftime("%Y-%m-%d", time.gmtime())
         history = [
-            {"timestamp": time.strftime("%Y-%m-%dT10:00:00Z"), "max_loss": 0.5}
+            {"timestamp": f"{today_utc}T10:00:00Z", "max_loss": 0.5}
             for _ in range(5)
         ]
         orders = [{

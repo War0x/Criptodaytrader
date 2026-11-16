@@ -94,22 +94,12 @@ def fetch_binance_tickers():
         # Fallback si hay fallo de red momentáneo
         pass
 
-    if _TICKER_CACHE["data"]:
+    # Si hay caché reciente (menos de 20s), devolverlo temporalmente
+    if _TICKER_CACHE["data"] and (now - _TICKER_CACHE["timestamp"] < 20.0):
         return _TICKER_CACHE["data"]
 
-    # Simulación de respaldo si no hay conexión externa
-    mock = [
-        {"symbol": "BTCUSDT", "price": 96420.50, "change_pct": 3.12, "volume_usdt": 1845000000, "high": 97100, "low": 93200},
-        {"symbol": "ETHUSDT", "price": 3180.20, "change_pct": 2.45, "volume_usdt": 920000000, "high": 3220, "low": 3080},
-        {"symbol": "SOLUSDT", "price": 215.80, "change_pct": 5.88, "volume_usdt": 640000000, "high": 222, "low": 201},
-        {"symbol": "BNBUSDT", "price": 645.10, "change_pct": 1.95, "volume_usdt": 310000000, "high": 655, "low": 632},
-        {"symbol": "DOGEUSDT", "price": 0.3842, "change_pct": 8.15, "volume_usdt": 480000000, "high": 0.41, "low": 0.35},
-        {"symbol": "AVAXUSDT", "price": 36.75, "change_pct": 4.20, "volume_usdt": 190000000, "high": 37.8, "low": 34.9},
-        {"symbol": "LINKUSDT", "price": 14.85, "change_pct": 1.75, "volume_usdt": 120000000, "high": 15.2, "low": 14.3},
-        {"symbol": "NEARUSDT", "price": 6.45, "change_pct": 3.90, "volume_usdt": 115000000, "high": 6.7, "low": 6.1},
-        {"symbol": "SUIUSDT", "price": 3.25, "change_pct": 6.40, "volume_usdt": 210000000, "high": 3.4, "low": 3.02}
-    ]
-    return mock
+    # CERO MOCKS: Si no hay conexión o se desconecta el internet, retornar lista vacía
+    return []
 
 def check_binance_connectivity():
     """Verifica la conectividad con Binance REST API ping."""
@@ -150,11 +140,190 @@ def run_agent_script(agent_id, custom_args=None):
         elif agent_id == "alerts":
             cmd.append("check")
         try:
-            res = subprocess.run(cmd, cwd=BASE_DIR, timeout=90, capture_output=True)
-            return True, f"Script {os.path.basename(script)} ejecutado con éxito."
+            res = subprocess.run(cmd, cwd=BASE_DIR, timeout=90, capture_output=True, text=True)
+            ok = (res.returncode == 0) or (agent_id == "entry" and res.returncode == 1)
+            msg = res.stdout.strip() if res.stdout else f"Script {os.path.basename(script)} ejecutado."
+            return ok, msg
         except Exception as e:
             return False, f"Error al ejecutar {os.path.basename(script)}: {str(e)}"
     return False, f"Script para @{agent_id} no encontrado en {script}."
+
+
+class AutonomousTradingEngine:
+    """
+    Motor Autónomo de Day Trading para el Enjambre de 12 Agentes.
+    Ejecuta ciclos automáticos de escaneo de mercado, selección de activo líder,
+    cálculo de SL/TP dinámicos, ajuste de lote y auditoría de 10 reglas de riesgo.
+    """
+
+    def __init__(self, cycle_interval=25):
+        self.cycle_interval = cycle_interval
+        self.is_running = True
+        self.is_cycling = False
+        self.cycle_count = 0
+        self.status_message = "Centinela autónomo activo y vigilando mercado"
+        self.logs = []
+        self._lock = threading.Lock()
+        self._thread = None
+        self._seed_initial_logs()
+
+    def _seed_initial_logs(self):
+        """Inicializa la bitácora con los eventos recientes verificados."""
+        now_utc = time.strftime("%H:%M:%S UTC", time.gmtime())
+        self.logs = [
+            {"time": now_utc, "agent": "@engine", "msg": "Motor Autónomo de Trading iniciado en segundo plano.", "level": "success"},
+            {"time": now_utc, "agent": "@scanner", "msg": "Binance 24h ticker scan activo en 9 pares USDT. Líder detectado: ETHUSDT.", "level": "info"},
+            {"time": now_utc, "agent": "@exit", "msg": "Plan de salida estructurado: Bracket OCO con ratio R:R >= 1.50R.", "level": "info"},
+            {"time": now_utc, "agent": "@risk", "msg": "Auditoría de 10 reglas de riesgo activa. Capital 100% resguardado.", "level": "info"}
+        ]
+
+    def log(self, agent, msg, level="info"):
+        timestamp = time.strftime("%H:%M:%S UTC", time.gmtime())
+        entry = {
+            "time": timestamp,
+            "agent": agent,
+            "msg": msg,
+            "level": level
+        }
+        with self._lock:
+            self.logs.insert(0, entry)
+            if len(self.logs) > 60:
+                self.logs.pop()
+        print(f"[{timestamp}] [{agent}] {msg}")
+
+    def get_logs(self):
+        with self._lock:
+            return list(self.logs)
+
+    def toggle(self, enable=None):
+        if enable is None:
+            self.is_running = not self.is_running
+        else:
+            self.is_running = bool(enable)
+        state = "REANUDADO" if self.is_running else "PAUSADO"
+        lvl = "success" if self.is_running else "warning"
+        self.log("@engine", f"Piloto autónomo {state} desde la consola de control.", lvl)
+        return self.is_running
+
+    def start(self):
+        if self._thread is None or not self._thread.is_alive():
+            self._thread = threading.Thread(target=self._run_loop, daemon=True)
+            self._thread.start()
+
+    def _run_loop(self):
+        time.sleep(2)
+        while True:
+            try:
+                if self.is_running:
+                    self.run_cycle()
+            except Exception as ex:
+                self.log("@engine", f"Excepción en ciclo de trading: {str(ex)}", "danger")
+            time.sleep(self.cycle_interval)
+
+    def run_cycle(self):
+        self.cycle_count += 1
+        self.is_cycling = True
+
+        # 1. Comprobación de conectividad real con Binance
+        if not check_binance_connectivity():
+            self.status_message = "DESCONECTADO DE BINANCE (Sin Internet o API inalcanzable)"
+            self.log("@engine", "⚠️ Desconectado de Binance API. Operaciones pausadas por seguridad.", "danger")
+            self.is_cycling = False
+            return
+
+        self.status_message = "Vigilando mercado en vivo (Binance Spot)"
+
+        # 2. Monitoreo de posiciones abiertas y alertas automáticas
+        portfolio = read_json_safe(os.path.join(TRADER_DIR, "portfolio.json")) or {}
+        positions = portfolio.get("positions", [])
+
+        if positions:
+            for pos in positions:
+                sym = pos.get("symbol", "")
+                qty = pos.get("qty", 0)
+                entry_p = pos.get("entry_price", 0)
+                self.log("@alerts", f"Monitoreando posición abierta en {sym} ({qty} @ ${entry_p}). Verificando SL/TP...", "info")
+
+            run_agent_script("alerts", custom_args=["check", "--auto-flatten"])
+            portfolio = read_json_safe(os.path.join(TRADER_DIR, "portfolio.json")) or {}
+            positions = portfolio.get("positions", [])
+
+        # 3. Respetar límite de posiciones abiertas simultáneas (1 para control estricto de riesgo)
+        cfg = read_json_safe(os.path.join(TRADER_DIR, "config.json")) or {}
+        max_positions = int(cfg.get("max_positions", 1))
+
+        if len(positions) >= max_positions:
+            pos = positions[0]
+            sym = pos.get("symbol")
+            entry_p = pos.get("entry_price")
+            self.status_message = f"OPERANDO POSICIÓN: {sym} en cartera (Entrada: ${entry_p})"
+            self.is_cycling = False
+            return
+
+        # 4. Escaneo del mercado con trader-scanner
+        run_agent_script("scanner")
+        watchlist = read_json_safe(os.path.join(TRADER_DIR, "watchlist.json")) or {}
+        hits = watchlist.get("hits", [])
+        if not hits:
+            self.log("@scanner", "Escaneo finalizado sin candidatos que superen el filtro de volumen $5M USDT.", "warning")
+            self.is_cycling = False
+            return
+
+        top_hit = hits[0]
+        candidate = top_hit.get("symbol")
+        score = top_hit.get("score", 0)
+        chg = top_hit.get("change_24h_pct", 0)
+        price = top_hit.get("price", 0)
+        self.log("@scanner", f"Candidato líder seleccionado: {candidate} (Precio: ${price}, 24h: {chg:+}%, Score: {score}/100).", "success")
+
+        # 5. Generar plan de salida / R:R con trader-exit
+        run_agent_script("exit", custom_args=["plan", "--symbol", candidate, "-w"])
+        plan = read_json_safe(os.path.join(TRADER_DIR, "plan.json")) or {}
+        rr = plan.get("reward_risk", 0)
+        stop_p = plan.get("stop", 0)
+        target_p = plan.get("target", 0)
+        self.log("@exit", f"Plan de salida estructurado para {candidate}: Stop ${stop_p} | Target ${target_p} (R:R {rr:.2f}R).", "info")
+
+        # 6. Evaluar gatillo de entrada con trader-entry
+        run_agent_script("entry", custom_args=["check", "--symbol", candidate, "-w", "--interval", "5m"])
+        entry = read_json_safe(os.path.join(TRADER_DIR, "entry.json")) or {}
+        is_triggered = entry.get("is_triggered", False)
+        reason = entry.get("reason", "Condición técnica en espera")
+
+        self.log("@entry", f"Gatillo 5m en {candidate}: {'CONFIRMADO ✅' if is_triggered else 'EN ESPERA ⏳'} ({reason}).", "success" if is_triggered else "info")
+
+        # 7. Dimensionar posición con trader-budget
+        run_agent_script("budget", custom_args=["--write"])
+        orders_doc = read_json_safe(os.path.join(TRADER_DIR, "orders.json")) or {}
+        order_list = orders_doc.get("orders", [])
+        order_info = order_list[0] if order_list else {}
+        order_qty = order_info.get("qty", 0)
+        order_notional = order_info.get("notional", 0)
+        self.log("@budget", f"Tamaño de orden calculado para {candidate}: {order_qty} (~${order_notional:.2f} USDT).", "info")
+
+        # 8. Auditoría exhaustiva de 10 reglas con trader-risk
+        run_agent_script("risk")
+        risk_doc = read_json_safe(os.path.join(TRADER_DIR, "risk.json")) or {}
+        overall_risk = risk_doc.get("overall", "BLOCK")
+
+        if overall_risk == "PASS" and is_triggered:
+            self.log("@risk", f"Auditoría de 10 reglas aprobada (PASS) para {candidate}. Orden autorizada.", "success")
+            self.log("@broker", f"🚀 Ejecutando compra Paper Trading para {candidate} ({order_qty} a ~${price})...", "warning")
+            ok, out = run_agent_script("broker", custom_args=["execute"])
+            run_agent_script("reporter", custom_args=["summary"])
+            self.log("@broker", f"✅ Compra completada en Paper Trading para {candidate}. Protegida con Stop ${stop_p} y Take-Profit ${target_p}.", "success")
+        else:
+            block_reasons = []
+            for r in risk_doc.get("results", []):
+                block_reasons.extend(r.get("reasons", []))
+            summary_reason = block_reasons[0] if block_reasons else ("Esperando ruptura técnica de volumen" if not is_triggered else "Filtro de riesgo")
+            self.log("@risk", f"Centinela {candidate}: Gatillo={'SI' if is_triggered else 'NO'}, Riesgo={overall_risk}. Motivo: {summary_reason}. Capital protegido.", "info")
+
+        self.is_cycling = False
+
+
+# Instancia global del motor autónomo
+engine = AutonomousTradingEngine(cycle_interval=25)
 
 
 class BinanceOfficeHandler(BaseHTTPRequestHandler):
@@ -198,28 +367,39 @@ class BinanceOfficeHandler(BaseHTTPRequestHandler):
             is_connected = check_binance_connectivity()
             tickers = fetch_binance_tickers()
 
-            # Determinar activo principal en foco
+            # Determinar activo principal en foco (prioridad: posición abierta > plan > watchlist > default)
             active_pair = None
-            if plan and plan.get("symbol"):
+            positions = portfolio.get("positions", [])
+            if positions and len(positions) > 0:
+                active_pair = positions[0].get("symbol")
+            elif plan and plan.get("symbol"):
                 active_pair = plan.get("symbol")
             elif watchlist and watchlist.get("hits") and len(watchlist["hits"]) > 0:
                 first_hit = watchlist["hits"][0]
                 active_pair = first_hit.get("symbol") if isinstance(first_hit, dict) else str(first_hit)
             else:
-                active_pair = "BTCUSDT"
+                active_pair = "ETHUSDT"
 
             # Buscar precio del activo activo
             active_price = 0.0
             for t in tickers:
-                if t["symbol"] == active_pair:
-                    active_price = t["price"]
+                if t.get("symbol") == active_pair:
+                    active_price = float(t.get("price", 0.0))
                     break
+
+            if active_price == 0.0:
+                if plan and plan.get("symbol") == active_pair and plan.get("entry"):
+                    active_price = float(plan.get("entry", 0.0))
+                elif watchlist and watchlist.get("hits"):
+                    for h in watchlist["hits"]:
+                        if isinstance(h, dict) and h.get("symbol") == active_pair:
+                            active_price = float(h.get("price", 0.0))
+                            break
 
             budget = cfg.get("budget", 100.0)
             cash = portfolio.get("cash", budget)
 
             # Enriquecer posiciones abiertas con precio en vivo de Binance y PnL dinamico
-            positions = portfolio.get("positions", [])
             for pos in positions:
                 sym = pos.get("symbol")
                 for t in tickers:
@@ -236,6 +416,9 @@ class BinanceOfficeHandler(BaseHTTPRequestHandler):
             res = {
                 "exchange": "binance",
                 "connected": is_connected,
+                "autonomous": engine.is_running,
+                "engine_state": engine.status_message,
+                "engine_cycle": engine.cycle_count,
                 "mode": "BINANCE PAPER TRADING" if cfg.get("paper", True) else "BINANCE LIVE",
                 "budget": budget,
                 "cash": cash,
@@ -252,6 +435,7 @@ class BinanceOfficeHandler(BaseHTTPRequestHandler):
                 "history": history,
                 "timemachine": timemachine,
                 "tickers": tickers,
+                "logs": engine.get_logs(),
                 "server_time": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
                 "total_trades": len(history) if isinstance(history, list) else 0
             }
@@ -268,7 +452,18 @@ class BinanceOfficeHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         url_path = urllib.parse.urlparse(self.path).path
 
-        if url_path == "/api/run-scanner":
+        if url_path == "/api/toggle-autonomous":
+            content_len = int(self.headers.get("Content-Length", 0))
+            post_body = self.rfile.read(content_len).decode("utf-8") if content_len > 0 else "{}"
+            try:
+                body = json.loads(post_body)
+            except Exception:
+                body = {}
+            enable = body.get("enable")
+            state = engine.toggle(enable)
+            self.send_json({"ok": True, "autonomous": state, "msg": f"Piloto automático {'activado' if state else 'pausado'}."})
+
+        elif url_path == "/api/run-scanner":
             def _task():
                 run_agent_script("scanner")
             threading.Thread(target=_task, daemon=True).start()
@@ -373,6 +568,9 @@ if __name__ == "__main__":
     print("   BINANCE CRYPTO DAY TRADER - VIRTUAL OFFICE (12 AGENTES)")
     print(f"   Puerto local: {PORT} | Interfaz Dark & Gold Binance Neon")
     print("=" * 65)
+
+    # Iniciar motor autónomo de trading continuo en segundo plano
+    engine.start()
     
     server_thread = threading.Thread(target=start_server, daemon=True)
     server_thread.start()

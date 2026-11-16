@@ -1,6 +1,6 @@
 {
   "created_by": "trader-timemachine",
-  "created_at": "2026-11-15T07:14:29Z",
+  "created_at": "2026-11-16T02:14:23Z",
   "symbol": "DOGEUSDT",
   "side": "BUY",
   "simulations": 500,
@@ -8,95 +8,95 @@
   "horizon_hours": 4.0,
   "candles_analyzed": 999,
   "plan": {
-    "entry": 0.05786,
-    "stop": 0.05751,
-    "target": 0.05839,
-    "reward_risk": 1.51
+    "entry": 0.05914,
+    "stop": 0.05844,
+    "target": 0.06019,
+    "reward_risk": 1.5
   },
   "results": {
-    "p_target": 0.276,
-    "p_stop": 0.718,
-    "p_neither": 0.006,
-    "win_rate": 0.2777,
-    "win_rate_pct": 27.77,
-    "expected_drawdown_pct": 0.74,
-    "max_drawdown_pct": 2.77,
-    "expected_value_r": -0.3,
-    "profit_factor": 0.58,
-    "avg_bars_to_exit": 8.7,
-    "median_final_price": 0.05751,
-    "p5_final_price": 0.05751,
-    "p95_final_price": 0.05839,
-    "target_hits": 138,
-    "stop_hits": 359,
-    "neither_hits": 3,
-    "verdict": "CAUTION: Unfavorable risk-reward profile (EV: -0.30R, 27.8% win rate)",
+    "p_target": 0.22,
+    "p_stop": 0.654,
+    "p_neither": 0.126,
+    "win_rate": 0.2517,
+    "win_rate_pct": 25.17,
+    "expected_drawdown_pct": 1.16,
+    "max_drawdown_pct": 3.61,
+    "expected_value_r": -0.324,
+    "profit_factor": 0.5,
+    "avg_bars_to_exit": 21.1,
+    "median_final_price": 0.05844,
+    "p5_final_price": 0.05844,
+    "p95_final_price": 0.06019,
+    "target_hits": 110,
+    "stop_hits": 327,
+    "neither_hits": 63,
+    "verdict": "CAUTION: Unfavorable risk-reward profile (EV: -0.32R, 25.2% win rate)",
     "recommendation": "REVIEW_BRACKET"
   },
   "bands": {
     "step_6_bars": {
       "time_minutes": 30,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05774,
-      "p75": 0.05803,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05878,
+      "median": 0.05906,
+      "p75": 0.05931,
+      "p95": 0.05972
     },
     "step_12_bars": {
       "time_minutes": 60,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05807,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05894,
+      "p75": 0.05939,
+      "p95": 0.06019
     },
     "step_18_bars": {
       "time_minutes": 90,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05836,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05879,
+      "p75": 0.05943,
+      "p95": 0.06019
     },
     "step_24_bars": {
       "time_minutes": 120,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05839,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05844,
+      "p75": 0.05946,
+      "p95": 0.06019
     },
     "step_30_bars": {
       "time_minutes": 150,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05839,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05844,
+      "p75": 0.05949,
+      "p95": 0.06019
     },
     "step_36_bars": {
       "time_minutes": 180,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05839,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05844,
+      "p75": 0.05955,
+      "p95": 0.06019
     },
     "step_42_bars": {
       "time_minutes": 210,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05839,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05844,
+      "p75": 0.05963,
+      "p95": 0.06019
     },
     "step_48_bars": {
       "time_minutes": 240,
-      "p5": 0.05751,
-      "p25": 0.05751,
-      "median": 0.05751,
-      "p75": 0.05839,
-      "p95": 0.05839
+      "p5": 0.05844,
+      "p25": 0.05844,
+      "median": 0.05844,
+      "p75": 0.05971,
+      "p95": 0.06019
     }
   }
 }

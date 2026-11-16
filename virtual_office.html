@@ -153,6 +153,41 @@
       background: rgba(14, 203, 129, 0.25);
       transform: translateY(-1px);
     }
+    .btn-autonomous {
+      background: rgba(14, 203, 129, 0.15);
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-autonomous:hover {
+      background: rgba(14, 203, 129, 0.28);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(14, 203, 129, 0.35);
+    }
+    .btn-autonomous.paused {
+      background: rgba(240, 185, 11, 0.12);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .btn-autonomous.paused:hover {
+      background: rgba(240, 185, 11, 0.22);
+      box-shadow: 0 4px 14px rgba(240, 185, 11, 0.35);
+    }
+    .btn-auto-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      display: inline-block;
+    }
+    .btn-autonomous.paused .btn-auto-dot {
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+    }
 
     /* BINANCE CRYPTO TICKER MARQUEE */
     .ticker-bar {
@@ -681,6 +716,65 @@
       text-transform: uppercase;
       font-family: var(--font-mono);
     }
+    .operating-live-badge.offline {
+      background: rgba(246, 70, 93, 0.16);
+      border-color: rgba(246, 70, 93, 0.65);
+      box-shadow: 0 0 14px rgba(246, 70, 93, 0.4);
+    }
+    .operating-live-badge.offline .operating-radar-dot {
+      background: var(--red);
+      box-shadow: 0 0 10px var(--red);
+    }
+    .operating-live-badge.offline .operating-radar-dot::after {
+      border-color: var(--red);
+    }
+    .operating-live-badge.offline .operating-label {
+      color: var(--red);
+    }
+    .operating-live-badge.paused {
+      background: rgba(240, 185, 11, 0.14);
+      border-color: rgba(240, 185, 11, 0.6);
+      box-shadow: 0 0 14px rgba(240, 185, 11, 0.35);
+    }
+    .operating-live-badge.paused .operating-radar-dot {
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+    }
+    .operating-live-badge.paused .operating-radar-dot::after {
+      display: none;
+    }
+    .operating-live-badge.paused .operating-label {
+      color: var(--gold);
+    }
+
+    /* NETWORK ALERT BANNER (STICKY TOP) */
+    .network-alert-banner {
+      background: linear-gradient(90deg, #4d0a14 0%, #991427 50%, #4d0a14 100%);
+      border-bottom: 2px solid #f6465d;
+      color: #ffffff;
+      padding: 10px 24px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 99999;
+      box-shadow: 0 4px 20px rgba(246, 70, 93, 0.55);
+      animation: alertPulse 2s infinite ease-in-out;
+    }
+    @keyframes alertPulse {
+      0% { box-shadow: 0 0 10px rgba(246, 70, 93, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(246, 70, 93, 0.85); }
+      100% { box-shadow: 0 0 10px rgba(246, 70, 93, 0.4); }
+    }
+    .network-alert-banner .alert-icon {
+      font-size: 18px;
+    }
     .operating-mini-dot {
       width: 7px;
       height: 7px;
@@ -905,6 +999,12 @@
 </head>
 <body>
 
+  <!-- BANNER DE ALERTA DE DESCONEXIÓN DE RED / BINANCE -->
+  <div id="network-alert-banner" class="network-alert-banner" style="display:none;">
+    <span class="alert-icon">⚠️</span>
+    <span class="alert-text"><strong>SIN CONEXIÓN A INTERNET / BINANCE OFFLINE:</strong> Se ha interrumpido la comunicación con Binance API. El enjambre autónomo ha pausado las operaciones para proteger tu capital.</span>
+  </div>
+
   <!-- TOP HEADER -->
   <header>
     <div class="header-main">
@@ -915,18 +1015,18 @@
           <p>12 Agentes Cuánticos Autónomos en Tiempo Real</p>
         </div>
         <!-- BADGE INDICADOR DE OPERACIÓN ACTIVA -->
-        <div class="operating-live-badge" title="El enjambre de 12 agentes de Binance está activo y operando 24/7">
-          <span class="operating-radar-dot"></span>
-          <span class="operating-icon">⚡</span>
-          <span class="operating-label">OPERANDO</span>
+        <div class="operating-live-badge" id="main-operating-badge" title="El enjambre de 12 agentes de Binance está activo y operando 24/7">
+          <span class="operating-radar-dot" id="main-operating-dot"></span>
+          <span class="operating-icon" id="main-operating-icon">⚡</span>
+          <span class="operating-label" id="main-operating-label">OPERANDO</span>
         </div>
       </div>
 
       <div class="header-stats">
-        <div class="stat-pill" style="border-color: rgba(14, 203, 129, 0.45); background: rgba(14, 203, 129, 0.1);">
+        <div class="stat-pill" id="pill-bot-status" style="border-color: rgba(14, 203, 129, 0.45); background: rgba(14, 203, 129, 0.1);">
           <span class="lbl">Estado Bots</span>
-          <span class="val green" style="display:flex; align-items:center; gap:5px;">
-            <span class="operating-mini-dot"></span> OPERANDO
+          <span class="val green" id="top-bot-status" style="display:flex; align-items:center; gap:5px;">
+            <span class="operating-mini-dot" id="top-bot-dot"></span> <span id="top-bot-text">OPERANDO</span>
           </span>
         </div>
         <div class="stat-pill">
@@ -947,7 +1047,7 @@
         </div>
         <div class="stat-pill">
           <span class="lbl">Vigilando (Setup)</span>
-          <span class="val" id="top-active-pair" style="color:var(--cyan);">SOL/USDT</span>
+          <span class="val" id="top-active-pair" style="color:var(--cyan);">ETHUSDT</span>
         </div>
         <div class="stat-pill">
           <span class="lbl">Precio Mercado</span>
@@ -956,6 +1056,9 @@
       </div>
 
       <div class="header-actions">
+        <button class="btn btn-autonomous" id="btn-autonomous" onclick="toggleAutonomous()" title="Alternar el piloto automático autónomo">
+          <span class="btn-auto-dot" id="btn-auto-dot"></span> <span id="btn-auto-text">⚡ PILOTO: ACTIVO</span>
+        </button>
         <button class="btn btn-gold" onclick="runScanner()">⚡ Escanear Binance</button>
         <button class="btn btn-action" onclick="executePaperTrade()">🎯 Ejecutar Paper</button>
         <button class="btn btn-action" onclick="openHistory()">📊 Abrir Historial</button>
@@ -1085,29 +1188,9 @@
       </div>
       <div class="feed-logs" id="feed-logs">
         <div class="feed-row">
-          <span class="feed-time">20:21 UTC</span>
-          <span class="feed-agent-tag" style="color:var(--gold);">@scanner</span>
-          <span class="feed-msg">Binance 24h ticker scan completado en 9 pares USDT. Ruptura de volatilidad detectada en SOLUSDT (+5.88%).</span>
-        </div>
-        <div class="feed-row">
-          <span class="feed-time">20:20 UTC</span>
-          <span class="feed-agent-tag" style="color:var(--cyan);">@whale</span>
-          <span class="feed-msg">Funding Rate en Binance Futures: SOL +0.0100%. Long/Short ratio en 1.84. Sesgo alcista validado.</span>
-        </div>
-        <div class="feed-row">
-          <span class="feed-time">20:19 UTC</span>
-          <span class="feed-agent-tag" style="color:var(--purple);">@timemachine</span>
-          <span class="feed-msg">10,000 bootstrap replays en SOLUSDT: Probabilidad de Target 1R primero = 58.4% vs Stop = 37.1%.</span>
-        </div>
-        <div class="feed-row">
-          <span class="feed-time">20:18 UTC</span>
-          <span class="feed-agent-tag" style="color:var(--green);">@budget</span>
-          <span class="feed-msg">Cálculo de lote USDT: Riesgo $2.50 / Stop $1.80 = 1.388 SOL (~$299.7). Acotado por máx posición (50% = $50 USDT -> 0.231 SOL).</span>
-        </div>
-        <div class="feed-row">
-          <span class="feed-time">20:17 UTC</span>
-          <span class="feed-agent-tag" style="color:var(--red);">@risk</span>
-          <span class="feed-msg">Auditoría previa a la orden: PASS. Límite diario de pérdida respetado, Min Notional $5.00 USDT cumplido.</span>
+          <span class="feed-time">--:--:-- UTC</span>
+          <span class="feed-agent-tag" style="color:var(--cyan); font-weight:800;">@engine</span>
+          <span class="feed-msg" style="color:var(--green);">Iniciando telemetría en vivo del enjambre...</span>
         </div>
       </div>
     </div>
@@ -1448,11 +1531,158 @@
       }
     }
 
+    function toggleAutonomous() {
+      fetch("/api/toggle-autonomous", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({})
+      })
+      .then(r => r.json())
+      .then(d => {
+        refreshStatus();
+      })
+      .catch(err => {
+        console.error("Error al alternar piloto:", err);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderFeedLogs(logs) {
+      const container = document.getElementById("feed-logs");
+      if (!container || !Array.isArray(logs) || logs.length === 0) return;
+
+      const colorMap = {
+        "@engine": "var(--cyan)",
+        "@scanner": "var(--gold)",
+        "@whale": "#00f0ff",
+        "@timemachine": "#d946ef",
+        "@analyst": "#60a5fa",
+        "@entry": "#38bdf8",
+        "@exit": "#a78bfa",
+        "@budget": "var(--green)",
+        "@risk": "#f6465d",
+        "@broker": "#f59e0b",
+        "@alerts": "#ef4444",
+        "@reporter": "#10b981"
+      };
+
+      let html = "";
+      logs.forEach(log => {
+        const agColor = colorMap[log.agent] || "var(--gold)";
+        let msgColor = "#e6e8ea";
+        if (log.level === "danger") msgColor = "#f6465d";
+        else if (log.level === "warning") msgColor = "var(--gold)";
+        else if (log.level === "success") msgColor = "var(--green)";
+
+        html += `
+          <div class="feed-row">
+            <span class="feed-time">${escapeHtml(log.time)}</span>
+            <span class="feed-agent-tag" style="color:${agColor}; font-weight:800;">${escapeHtml(log.agent)}</span>
+            <span class="feed-msg" style="color:${msgColor};">${escapeHtml(log.msg)}</span>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
     // ACTUALIZACIÓN DE ESTADO DESDE LA API
     function refreshStatus() {
       fetch("/api/status")
         .then(r => r.json())
         .then(data => {
+          // 1. Manejo de Conexión de Red / Binance
+          const isConnected = data.connected === true;
+          const banner = document.getElementById("network-alert-banner");
+          const mainBadge = document.getElementById("main-operating-badge");
+          const mainIcon = document.getElementById("main-operating-icon");
+          const mainLabel = document.getElementById("main-operating-label");
+          const pillBot = document.getElementById("pill-bot-status");
+          const botText = document.getElementById("top-bot-text");
+          const botDot = document.getElementById("top-bot-dot");
+          const autoBtn = document.getElementById("btn-autonomous");
+          const autoBtnText = document.getElementById("btn-auto-text");
+
+          if (!isConnected) {
+            if (banner) banner.style.display = "flex";
+            if (mainBadge) {
+              mainBadge.className = "operating-live-badge offline";
+              if (mainIcon) mainIcon.innerText = "❌";
+              if (mainLabel) mainLabel.innerText = "DESCONECTADO (OFFLINE)";
+            }
+            if (pillBot) {
+              pillBot.style.borderColor = "rgba(246, 70, 93, 0.5)";
+              pillBot.style.background = "rgba(246, 70, 93, 0.12)";
+            }
+            if (botText) {
+              botText.innerText = "DESCONECTADO";
+              botText.style.color = "var(--red)";
+            }
+            if (botDot) {
+              botDot.style.background = "var(--red)";
+              botDot.style.boxShadow = "0 0 8px var(--red)";
+            }
+          } else {
+            if (banner) banner.style.display = "none";
+            const isAutonomous = data.autonomous !== false;
+
+            if (autoBtn) {
+              if (isAutonomous) {
+                autoBtn.className = "btn btn-autonomous active";
+                if (autoBtnText) autoBtnText.innerText = "⚡ PILOTO: ACTIVO";
+              } else {
+                autoBtn.className = "btn btn-autonomous paused";
+                if (autoBtnText) autoBtnText.innerText = "⏸️ PILOTO: PAUSADO";
+              }
+            }
+
+            if (!isAutonomous) {
+              if (mainBadge) {
+                mainBadge.className = "operating-live-badge paused";
+                if (mainIcon) mainIcon.innerText = "⏸️";
+                if (mainLabel) mainLabel.innerText = "PILOTO PAUSADO";
+              }
+              if (pillBot) {
+                pillBot.style.borderColor = "rgba(240, 185, 11, 0.5)";
+                pillBot.style.background = "rgba(240, 185, 11, 0.12)";
+              }
+              if (botText) {
+                botText.innerText = "PAUSADO";
+                botText.style.color = "var(--gold)";
+              }
+              if (botDot) {
+                botDot.style.background = "var(--gold)";
+                botDot.style.boxShadow = "0 0 8px var(--gold)";
+              }
+            } else {
+              if (mainBadge) {
+                mainBadge.className = "operating-live-badge";
+                if (mainIcon) mainIcon.innerText = "⚡";
+                if (mainLabel) mainLabel.innerText = "OPERANDO (VIVO)";
+              }
+              if (pillBot) {
+                pillBot.style.borderColor = "rgba(14, 203, 129, 0.45)";
+                pillBot.style.background = "rgba(14, 203, 129, 0.1)";
+              }
+              if (botText) {
+                botText.innerText = "OPERANDO";
+                botText.style.color = "var(--green)";
+              }
+              if (botDot) {
+                botDot.style.background = "var(--green)";
+                botDot.style.boxShadow = "0 0 8px var(--green)";
+              }
+            }
+          }
+
           if (data.budget) {
             document.getElementById("top-budget").innerText = "$" + Number(data.budget).toFixed(2) + " USDT";
           }
@@ -1466,23 +1696,32 @@
             document.getElementById("top-active-pair").innerText = data.active_pair;
           }
           if (data.active_price) {
-            document.getElementById("top-active-price").innerText = "$" + Number(data.active_price).toLocaleString();
+            const p = Number(data.active_price);
+            document.getElementById("top-active-price").innerText = "$" + (p < 1 ? p.toFixed(6) : p.toLocaleString());
+          }
+
+          // Renderizar bitácora en vivo
+          if (data.logs && data.logs.length > 0) {
+            renderFeedLogs(data.logs);
           }
 
           // Renderizar monedas activas en cartera con precio de compra
           const positions = (data.portfolio && data.portfolio.positions) ? data.portfolio.positions : [];
-          renderActiveCoins(positions, data.tickers || []);
+          renderActiveCoins(positions, data.tickers || [], data.active_pair);
 
           // Actualizar ticker tape si hay datos frescos
           if (data.tickers && data.tickers.length > 0) {
             renderTickerTrack(data.tickers);
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          const banner = document.getElementById("network-alert-banner");
+          if (banner) banner.style.display = "flex";
+        });
     }
 
     // RENDERIZADO DE MONEDAS ACTIVAS (CON PRECIO DE COMPRA)
-    function renderActiveCoins(positions, tickers) {
+    function renderActiveCoins(positions, tickers, activePair) {
       const container = document.getElementById("active-coins-grid");
       const countBadge = document.getElementById("active-coins-count");
       if (!container) return;
@@ -1498,12 +1737,13 @@
       }
 
       if (posList.length === 0) {
+        const watchCoin = activePair || "el mercado";
         container.innerHTML = `
           <div class="empty-positions-card">
             <div class="empty-pos-icon">🛡️</div>
             <div class="empty-pos-text">
               <h4>100% EFECTIVO EN CARTERA — SIN MONEDAS COMPRADAS EN ESTE MOMENTO</h4>
-              <p>Tu capital está 100% protegido en efectivo USDT. Los bots están vigilando <strong>DOGEUSDT</strong> esperando la confirmación de ruptura para comprar. Si deseas abrir una posición de prueba ahora mismo para verla aquí reflejada con su precio de compra, haz clic arriba en <strong>"🎯 Ejecutar Paper"</strong>.</p>
+              <p>Tu capital está 100% protegido en efectivo USDT. Los bots están vigilando <strong>${escapeHtml(watchCoin)}</strong> en Binance esperando la confirmación de ruptura técnica para comprar. Si deseas abrir una posición de prueba ahora mismo para verla aquí reflejada con su precio de compra, haz clic arriba en <strong>"🎯 Ejecutar Paper"</strong>.</p>
             </div>
             <div class="empty-pos-badge">
               <span class="operating-mini-dot"></span> BOTS VIGILANDO
