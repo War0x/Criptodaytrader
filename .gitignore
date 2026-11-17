@@ -24,3 +24,8 @@ desktop.ini
 # Scratch and temp files
 *.tmp
 *.bak
+
+# SQLite databases
+*.db
+*.db-wal
+*.db-shm
